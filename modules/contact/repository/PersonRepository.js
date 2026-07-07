@@ -1,30 +1,32 @@
+const BaseRepository = require("../../../core/framework/BaseRepository");
 const query = require("../../../core/database/query");
 
-async function create(name) {
+class PersonRepository extends BaseRepository {
 
-    return await query.run(
+    constructor() {
 
-        "INSERT INTO orang(nama) VALUES(?)",
+        super("orang");
 
-        [name]
+    }
 
-    );
+    async create(nama) {
+
+        return await query.run(
+            "INSERT INTO orang(nama) VALUES(?)",
+            [nama]
+        );
+
+    }
+
+    async update(id, nama) {
+
+        return await query.run(
+            "UPDATE orang SET nama=? WHERE id=?",
+            [nama, id]
+        );
+
+    }
 
 }
 
-async function getAll() {
-
-    return await query.all(
-
-        "SELECT * FROM orang ORDER BY id"
-
-    );
-
-}
-
-module.exports = {
-
-    create,
-    getAll
-
-};
+module.exports = new PersonRepository();
