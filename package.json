@@ -14,8 +14,23 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.18.1",
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dayjs": "^1.11.21",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "express-session": "^1.19.0",
     "fs-extra": "^11.3.6",
-    "sqlite3": "^6.0.1"
+    "jsonwebtoken": "^9.0.3",
+    "morgan": "^1.11.0",
+    "multer": "^2.2.0",
+    "nodemailer": "^9.0.3",
+    "pdfkit": "^0.19.1",
+    "socket.io": "^4.8.3",
+    "sqlite3": "^6.0.1",
+    "uuid": "^14.0.1",
+    "xlsx": "^0.18.5"
   }
 }
