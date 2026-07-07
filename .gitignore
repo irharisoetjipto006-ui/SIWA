@@ -1,0 +1,13 @@
+*.db
+*.sqlite
+*.sqlite3
+
+backup/
+logs/
+temp/
+
+.vscode/
+node_modules/
+
+.DS_Store
+Thumbs.db
