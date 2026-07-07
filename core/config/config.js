@@ -1,11 +1,9 @@
-const config = {
+module.exports = {
 
     appName: "SIWA",
 
-    version: "0.1.0",
+    version: "1.0.0",
 
     database: "./database/siwa.db"
 
 };
-
-module.exports = config;

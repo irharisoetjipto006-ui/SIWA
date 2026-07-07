@@ -1,0 +1,21 @@
+{
+  "name": "siwa",
+  "version": "1.0.0",
+  "description": "Sistem Informasi Warga & Aktivitas",
+  "main": "app.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1",
+    "fs-extra": "^11.3.6",
+    "sqlite3": "^6.0.1"
+  }
+}
