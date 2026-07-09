@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SIWA - Hari Ini</title>
+<title>SIWA - Dashboard</title>
 
 <style>
 
@@ -15,165 +15,97 @@
 }
 
 html,body{
-
     height:100%;
-
     overflow:hidden;
-
     font-family:Arial,Helvetica,sans-serif;
-
     background:#edf4ed;
-
 }
 
 body{
-
     display:flex;
-
     flex-direction:column;
-
 }
 
-/* ================= HEADER ================= */
-
 header{
-
     background:#2e7d32;
-
     color:white;
-
-    padding:12px 25px;
-
+    padding:15px 25px;
 }
 
 header h1{
-
-    font-size:32px;
-
+    font-size:34px;
 }
 
 header p{
-
-    font-size:16px;
-
-    margin-top:3px;
-
+    font-size:18px;
+    margin-top:5px;
 }
 
-/* ================= CONTENT ================= */
-
 main{
-
     flex:1;
-
     padding:20px;
-
     display:flex;
-
     flex-direction:column;
-
 }
 
 .info{
-
     background:white;
-
     border-radius:12px;
-
-    padding:15px 20px;
-
-    box-shadow:0 2px 6px rgba(0,0,0,.1);
-
+    padding:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
 }
 
 .info h2{
-
-    font-size:30px;
-
+    font-size:28px;
+    margin-bottom:10px;
 }
 
 .info p{
-
-    margin-top:8px;
-
     font-size:18px;
-
+    margin-top:5px;
 }
-
-/* ================= BUTTON FKKP ================= */
 
 .mainButton{
-
-    margin-top:18px;
-
+    display:block;
+    margin-top:20px;
     background:#43a047;
-
     color:white;
-
     text-decoration:none;
-
     text-align:center;
-
-    border-radius:15px;
-
+    border-radius:12px;
     padding:18px;
-
-    font-size:34px;
-
+    font-size:32px;
     font-weight:bold;
-
 }
 
-/* ================= MENU ================= */
-
 .grid{
-
     flex:1;
-
-    margin-top:18px;
-
+    margin-top:20px;
     display:grid;
-
     grid-template-columns:repeat(3,1fr);
-
     grid-template-rows:repeat(2,1fr);
-
     gap:15px;
-
 }
 
 .card{
-
     background:white;
-
     border-radius:12px;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     text-align:center;
-
-    font-size:24px;
-
-    box-shadow:0 2px 8px rgba(0,0,0,.1);
-
+    text-decoration:none;
+    color:#222;
+    font-size:22px;
+    font-weight:bold;
+    box-shadow:0 2px 8px rgba(0,0,0,.12);
 }
 
-/* ================= FOOTER ================= */
-
 footer{
-
     text-align:center;
-
     padding:12px;
-
+    font-size:17px;
     color:#666;
-
-    font-size:18px;
-
 }
 
 </style>
@@ -186,7 +118,7 @@ footer{
 
 <h1>🌱 SIWA</h1>
 
-<p>Pertumbuhan Hayat — Hari Ini</p>
+<p>Sistem Informasi Warga & Pertumbuhan Hayat</p>
 
 </header>
 
@@ -196,31 +128,35 @@ footer{
 
 <h2>Kamis, 9 Juli 2026</h2>
 
-<p>FKKP : Minggu 2 • Hari 4</p>
+<p><b>FKKP :</b> Minggu <%= fkkp.week %> • Hari <%= fkkp.day %></p>
 
-<p>Tema : Ministri Rekonsiliasi</p>
+<p><b>Buku :</b> <%= fkkp.book %></p>
+
+<p><b>Penulis :</b> <%= fkkp.author %></p>
+
+<p><b>Tema :</b> <%= fkkp.title %></p>
 
 </div>
 
-<a href="#" class="mainButton">
+<a href="/fkkp" class="mainButton">
 
-📖 BACA FKKP
+📖 BACA FKKP HARI INI
 
 </a>
 
 <div class="grid">
 
-<div class="card">📚<br>Alkitab</div>
+<a href="#" class="card">📚<br>Alkitab</a>
 
-<div class="card">💬<br>Dialog AI</div>
+<a href="#" class="card">💬<br>Ringkasan WA</a>
 
-<div class="card">🎧<br>Audio</div>
+<a href="#" class="card">🤖<br>Pendalaman AI</a>
 
-<div class="card">📝<br>Jurnal</div>
+<a href="#" class="card">📝<br>Rhema Saya</a>
 
-<div class="card">🎤<br>SPR</div>
+<a href="#" class="card">🎧<br>Audio</a>
 
-<div class="card">🤝<br>Kehidupan Gereja</div>
+<a href="#" class="card">🤝<br>Kehidupan Gereja</a>
 
 </div>
 
@@ -228,7 +164,7 @@ footer{
 
 <footer>
 
-"Makan Firman hari ini untuk hidup hari ini."
+"Firman → Rhema → Pengalaman → Pertumbuhan Hayat"
 
 </footer>
 

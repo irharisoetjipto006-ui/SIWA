@@ -1,50 +1,72 @@
 const express = require("express");
+const fs = require("fs");
+const path = require("path");
 
 const app = express();
-
-// ======================================
-// Konfigurasi
-// ======================================
 
 app.set("view engine", "ejs");
 app.set("views", "./web/views");
 
-// Folder public (CSS, JavaScript, gambar)
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("web/public"));
 
-app.use(express.urlencoded({ extended: true }));
+// =========================
+// Membaca data FKKP
+// =========================
 
-// ======================================
-// Routing
-// ======================================
+function getCurrentFKKP() {
+    const file = path.join(__dirname, "data", "fkkp", "current.json");
 
-// HOME
+    if (!fs.existsSync(file)) {
+        return {
+            book: "Belum ada buku",
+            author: "",
+            week: 1,
+            day: 1,
+            title: ""
+        };
+    }
+
+    return JSON.parse(fs.readFileSync(file, "utf8"));
+}
+
+// =========================
+// ROUTES
+// =========================
+
 app.get("/", (req, res) => {
     res.redirect("/dashboard");
 });
 
-// Dashboard
 app.get("/dashboard", (req, res) => {
-    res.render("dashboard");
+
+    const fkkp = getCurrentFKKP();
+
+    res.render("dashboard", {
+        fkkp
+    });
+
 });
 
-// Data Orang
-app.get("/person", (req, res) => {
-    res.render("person");
-});
-
-// FKKP
 app.get("/fkkp", (req, res) => {
-    res.render("fkkp/day");
+
+    const fkkp = getCurrentFKKP();
+
+    res.render("fkkp/day", fkkp);
+
 });
 
-// ======================================
-// Jalankan Server
-// ======================================
+// =========================
 
-app.listen(3000, () => {
-    console.log("==================================");
+const PORT = 3000;
+const HOST = "0.0.0.0";
+
+app.listen(PORT, HOST, () => {
+
+    console.log("");
+    console.log("=================================");
     console.log(" SIWA SERVER BERJALAN");
-    console.log(" http://localhost:3000");
-    console.log("==================================");
+    console.log(` http://${HOST}:${PORT}`);
+    console.log("=================================");
+
 });
