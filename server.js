@@ -1,24 +1,50 @@
 const express = require("express");
-const cors = require("cors");
-
-const routes = require("./api/routes");
 
 const app = express();
 
-app.use(cors());
-app.use(express.json());
+// ======================================
+// Konfigurasi
+// ======================================
 
-app.use("/", routes);
+app.set("view engine", "ejs");
+app.set("views", "./web/views");
 
-const PORT = 3000;
+// Folder public (CSS, JavaScript, gambar)
+app.use(express.static("web/public"));
 
-app.listen(PORT, () => {
+app.use(express.urlencoded({ extended: true }));
 
-    console.log("");
-    console.log("===============================");
-    console.log("SIWA REST API");
-    console.log("===============================");
-    console.log("Listening : http://localhost:3000");
-    console.log("");
+// ======================================
+// Routing
+// ======================================
 
+// HOME
+app.get("/", (req, res) => {
+    res.redirect("/dashboard");
+});
+
+// Dashboard
+app.get("/dashboard", (req, res) => {
+    res.render("dashboard");
+});
+
+// Data Orang
+app.get("/person", (req, res) => {
+    res.render("person");
+});
+
+// FKKP
+app.get("/fkkp", (req, res) => {
+    res.render("fkkp/day");
+});
+
+// ======================================
+// Jalankan Server
+// ======================================
+
+app.listen(3000, () => {
+    console.log("==================================");
+    console.log(" SIWA SERVER BERJALAN");
+    console.log(" http://localhost:3000");
+    console.log("==================================");
 });
