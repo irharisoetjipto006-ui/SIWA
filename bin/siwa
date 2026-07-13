@@ -1,0 +1,57 @@
+#!/bin/bash
+
+SIWA_HOME="$HOME/SIWA"
+
+show_help() {
+echo ""
+echo "======================================="
+echo "            SIWA CLI"
+echo "======================================="
+echo ""
+echo " build     Build / upgrade SIWA"
+echo " start     Jalankan server"
+echo " stop      Hentikan server"
+echo " update    Git add + commit + push"
+echo " doctor    Diagnosa SIWA"
+echo " version   Informasi SIWA"
+echo " help      Bantuan"
+echo ""
+}
+
+case "$1" in
+build)
+    exec "$SIWA_HOME/tools/build.sh"
+    ;;
+
+start)
+    exec "$SIWA_HOME/tools/start.sh"
+    ;;
+
+stop)
+    exec "$SIWA_HOME/tools/stop.sh"
+    ;;
+
+doctor)
+    exec "$SIWA_HOME/tools/doctor.sh"
+    ;;
+
+update)
+    exec "$SIWA_HOME/tools/update.sh" "${@:2}"
+    ;;
+
+version)
+    echo "SIWA"
+    git -C "$SIWA_HOME" rev-parse --short HEAD
+    ;;
+
+help|"")
+    show_help
+    ;;
+
+*)
+    echo "Perintah tidak dikenal : $1"
+    echo ""
+    show_help
+    exit 1
+    ;;
+esac
