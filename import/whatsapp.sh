@@ -1,8 +1,10 @@
 #!/bin/bash
 DIR="$HOME/SIWA/data/import/whatsapp/eksport_wa"
+OUT_DIR="$HOME/SIWA/data/import/whatsapp/parsed"
+mkdir -p "$OUT_DIR"
 
 echo "=================================="
-echo "       SIWA Import WhatsApp"
+echo "    SIWA Import & Parse WhatsApp  "
 echo "=================================="
 
 if [ ! -d "$DIR" ]; then
@@ -17,7 +19,7 @@ if [ "$TOTAL_ZIP" -eq 0 ]; then
     exit 1
 fi
 
-echo "Ditemukan $TOTAL_ZIP file ekspor WhatsApp."
+echo "Ditemukan $TOTAL_ZIP file ekspor. Memproses ke JSON..."
 echo "----------------------------------"
 
 for ZIP_FILE in "$DIR"/*.zip; do
@@ -30,20 +32,10 @@ for ZIP_FILE in "$DIR"/*.zip; do
     if [ -f "$TXT_FILE" ]; then
         RAW_NAME=$(basename "$TXT_FILE" .txt)
         GROUP_NAME=${RAW_NAME#"Chat WhatsApp dengan "}
+        SAFE_NAME=$(echo "$GROUP_NAME" | tr -s " " "_" | tr -cd "[:alnum:]_")
+        JSON_OUT="$OUT_DIR/${SAFE_NAME}.json"
         
-        CHAT_CNT=$(grep -c "^[0-9]" "$TXT_FILE" 2>/dev/null | tr -d nr || echo 0)
-        AUD_CNT=$(grep -c "AUD-" "$TXT_FILE" 2>/dev/null | tr -d nr || echo 0)
-        IMG_CNT=$(grep -c "IMG-" "$TXT_FILE" 2>/dev/null | tr -d nr || echo 0)
-        DOC_CNT=$(grep -c "DOC-\|PDF\|DOCX" "$TXT_FILE" 2>/dev/null | tr -d nr || echo 0)
-        STK_CNT=$(grep -c "STK-\|webp" "$TXT_FILE" 2>/dev/null | tr -d nr || echo 0)
-        
-        echo "Grup    : $GROUP_NAME"
-        echo "Chat    : $CHAT_CNT"
-        echo "Audio   : $AUD_CNT"
-        echo "Gambar  : $IMG_CNT"
-        echo "Dokumen : $DOC_CNT"
-        echo "Sticker : $STK_CNT"
-        echo "Status  : BERHASIL"
+        python3 "$HOME/SIWA/import/parse_wa.py" "$TXT_FILE" "$JSON_OUT" "$GROUP_NAME"
         echo "----------------------------------"
     fi
     
